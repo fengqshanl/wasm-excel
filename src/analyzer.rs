@@ -2,6 +2,7 @@ use js_sys::{Array, JsString, Uint8Array};
 use web_sys::{File, FileReader};
 use wasm_bindgen::prelude::*;
 use std::rc::Rc;
+use std::io::Cursor;
 use calamine::{open_workbook, Error, Xlsx, Reader, RangeDeserializerBuilder, DataType};
 
 #[wasm_bindgen]
@@ -17,23 +18,37 @@ pub fn analyzer(file: File) {
     move || {
       let excel_result = reader.result().unwrap();
       let arr = Uint8Array::new(&excel_result);
-      let mut excel = open_workbook(arr).map_err(|e| JsValue::from_str(&format!("{:?}", e))).unwrap();
-      let mut result = String::new();
-      if let Some(Ok(range)) = excel.worksheet_range_at(0) {
-          for row in range.rows() {
-              for cell in row.iter() {
-                  match cell {
-                      DataType::String(s) => result.push_str(&format!("{} | ", s)),
-                      DataType::Float(f) => result.push_str(&format!("{} | ", f)),
-                      _ => result.push_str("Unsupported | "),
-                  }
-              }
-              result.push('\n');
-          }
-      }
-      log(&result);
+      let u8arr = convert_to_u8_slice(arr).expect("msg");
+      read_data_from_uint8array(&u8arr).unwrap();
   }});
   reader.add_event_listener_with_callback("load", on_load.as_ref().unchecked_ref());
   reader.read_as_array_buffer(&file);
   on_load.forget();
+}
+
+fn convert_to_u8_slice(uint8_array: Uint8Array) -> Result<Vec<u8>, JsValue> {
+    let array = js_sys::Uint8Array::new(&mut uint8_array.buffer()).subarray(0, uint8_array.length());
+
+    let u8_slice = array.to_vec();
+
+    Ok(u8_slice)
+}
+
+fn read_data_from_uint8array(data: &[u8]) -> Result<(), calamine::Error> {
+  let cursor = Cursor::new(data);
+  let mut xls: Xlsx<_> = calamine::open_workbook_from_rs(cursor)?;
+  if let Some(Ok(sheet)) = xls.worksheet_range_at(0) {
+      for row in sheet.rows() {
+          for cell in row {
+              match cell {
+                  calamine::DataType::Empty => log("Empty"),
+                  calamine::DataType::String(x) => log(x),
+                  calamine::DataType::Float(x) => log("---------------float--------------->"),
+                  // 处理其他数据类型
+                  _ => ()
+              }
+          }
+      }
+  }
+  Ok(())
 }
