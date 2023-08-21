@@ -38,17 +38,36 @@ fn read_data_from_uint8array(data: &[u8]) -> Result<(), calamine::Error> {
   let cursor = Cursor::new(data);
   let mut xls: Xlsx<_> = calamine::open_workbook_from_rs(cursor)?;
   if let Some(Ok(sheet)) = xls.worksheet_range_at(0) {
-      for row in sheet.rows() {
-          for cell in row {
-              match cell {
-                  calamine::DataType::Empty => log("Empty"),
-                  calamine::DataType::String(x) => log(x),
-                  calamine::DataType::Float(x) => log("---------------float--------------->"),
-                  // 处理其他数据类型
-                  _ => ()
-              }
-          }
+    let size = sheet.get_size();
+    for row in 0..size.0 {
+      for col in 0..size.1 {
+        match sheet.get_value((row as u32, col as u32)).unwrap() {
+          calamine::DataType::Empty => log("Empty"),
+          calamine::DataType::String(x) => {
+            log(&x);
+          },
+          calamine::DataType::Float(x) => log("---------------float--------------->"),
+          // 处理其他数据类型
+          _ => ()
+        }
       }
+    }
+    // 打印获取到的数据
+    // println!("数据：{}", cell_value);
+    //   for (index, row) in sheet.rows().enumerate() {
+    //       for cell in row {
+    //           match cell {
+    //               calamine::DataType::Empty => log("Empty"),
+    //               calamine::DataType::String(x) => {
+    //                 log(&index.to_string());
+    //                 log(x);
+    //               },
+    //               calamine::DataType::Float(x) => log("---------------float--------------->"),
+    //               // 处理其他数据类型
+    //               _ => ()
+    //           }
+    //       }
+    //   }
   }
   Ok(())
 }
