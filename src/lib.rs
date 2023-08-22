@@ -1,5 +1,6 @@
 #![allow(unused_variables)]
 pub mod analyzer;
+pub mod render;
 use wasm_bindgen::prelude::*;
 use web_sys::{ Event, HtmlInputElement, EventTarget, InputEvent };
 use js_sys::Function;
@@ -8,7 +9,7 @@ use js_sys::Object;
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
-    fn log(s: &str);
+    pub fn log(s: &str);
 
     #[wasm_bindgen(js_namespace = console, js_name = log)]
     fn log_u32(a: u32);
@@ -38,6 +39,6 @@ pub fn run() -> Result<(), JsValue> {
     val.add_event_listener_with_callback("change", set_page.as_ref().unchecked_ref()).unwrap();
     set_page.forget();
     body.append_child(&val)?;
-
+    render::render_excel()?; 
     Ok(())
 }
