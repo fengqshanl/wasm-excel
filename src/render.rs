@@ -62,7 +62,7 @@ pub fn render_left_border() -> Element {
 
   left_border.set_attribute("id", "excel_left_border");
   left_border.set_attribute("style", "display:flex;flex-direction:column;flex-wrap:no-wrap;min-width:60px;margin-top:-1px");
-  for col in 1..51 {
+  for col in 1..5001 {
     let row_col_child = document.create_element("div").unwrap();
     row_col_child.set_attribute("id", &format!("excel_left_border_{}", col));
     row_col_child.set_attribute("style", "border: 0.1px solid #d1d1d1;display:flex;font-size:12px;padding:1px;height:15px;width:60px;overflow:hidden;text-overflow: ellipsis;white-space: nowrap;justify-content:center;align-items:center");
@@ -75,7 +75,7 @@ pub fn render_left_border() -> Element {
 pub fn render_context(parent: &Element) {
   let window = web_sys::window().expect("no global `window` exists");
   let document = window.document().expect("should have a document on window");
-  for row in 0..50 {
+  for row in 0..5000 {
     let excel_row = document.create_element("div").unwrap();
     excel_row.set_attribute("id", &format!("excel_{}", row));
     excel_row.set_attribute("style", "display:flex;flex-direction:row;flex-wrap:no-wrap;");
@@ -97,5 +97,4 @@ pub fn update_excel(row: usize, col: usize, content: &str) {
   let excel_td= document.get_element_by_id(&format!("excel_{}_{}", row, col)).unwrap();
 
   excel_td.set_inner_html(content);
-  log(&format!("位于第:{}行,第:{}列，信息为:{}。", row, col, content));
 }
