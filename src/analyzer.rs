@@ -4,7 +4,7 @@ use wasm_bindgen::prelude::*;
 use std::rc::Rc;
 use crate::log;
 use std::io::Cursor;
-use crate::render::update_excel;
+use crate::render::update::update_excel;
 use calamine::{open_workbook, Error, Xlsx, Reader, RangeDeserializerBuilder, DataType};
 
 pub fn analyzer(file: File) {
