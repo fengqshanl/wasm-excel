@@ -1,0 +1,93 @@
+.excel_row_col_div {
+  border-right: 0.1px solid #d1d1d1;
+  border-bottom: 0.1px solid #d1d1d1;
+  display:flex;
+  font-size:12px;
+  padding:1px;
+  height:15px;
+  min-width:60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+.excel_row_col_div:hover {
+  border-color: red;
+}
+.excel_row {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:no-wrap;
+}
+#excel_top_border {
+  display:flex;
+  position: sticky;
+  top: 0;
+  flex-direction:row;
+  flex-wrap:no-wrap;
+}
+.excel_top_border_col {
+  border-top: 0.1px solid #d1d1d1;
+  border-right: 0.1px solid #d1d1d1;
+  border-bottom: 0.1px solid #d1d1d1;
+  display:flex;
+  font-size:12px;
+  padding:1px;
+  height:15px;
+  min-width:60px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content:center;
+  align-items:center
+}
+#excel_third_parent_container {
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  margin-left:3px;
+  margin-top:-1px
+}
+#excel_left_border {
+  border: 1px solid red;
+  display:flex;
+  width: 62px;
+  position: sticky;
+  left: 0;
+  flex-direction:column;
+  flex-wrap:no-wrap;
+  min-width:60px;
+  margin-top:-1px
+}
+.excel_left_border_col {
+  border-right: 0.1px solid #d1d1d1;
+  border-bottom: 0.1px solid #d1d1d1;
+  display:flex;
+  font-size:12px;
+  padding:1px;
+  height:15px;
+  width:60px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-content:center;
+  align-items:center"
+}
+#excel_secondary_parent_container {
+  width:100%;
+  display:flex;
+  flex-direction:row
+}
+#excel_parent_container {
+  width:90vw;
+  height:80vh;
+  overflow:auto;
+  display: inline-block;
+}
+.context_container {
+  left: 71px;
+  position: relative;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  top: 49px;
+}

@@ -1,6 +1,8 @@
 #![allow(unused_variables)]
 pub mod analyzer;
 pub mod render;
+pub mod event;
+pub mod style;
 use wasm_bindgen::prelude::*;
 use web_sys::{ Event, HtmlInputElement, EventTarget, InputEvent };
 use js_sys::Function;
@@ -23,6 +25,7 @@ pub fn run() -> Result<(), JsValue> {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let body = document.body().expect("document should have a body");
+    style::load_style();
     let val = document.create_element("input")?;
     val.set_attribute("type", "file");
     let set_page = Closure::<dyn FnMut(Event)>::new(move |event: Event| {
