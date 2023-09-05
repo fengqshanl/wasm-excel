@@ -12,7 +12,7 @@ default = ["console_error_panic_hook"]
 
 [dependencies]
 wasm-bindgen = "0.2.84"
-calamine = "0.21.2"
+calamine = "0.22.0"
 js-sys = "0.3.64"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
