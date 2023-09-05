@@ -31,6 +31,7 @@ fn convert_to_u8_slice(uint8_array: Uint8Array) -> Result<Vec<u8>, JsValue> {
 fn read_data_from_uint8array(data: &[u8]) -> Result<(), calamine::Error> {
   let cursor = Cursor::new(data);
   let mut xls: Xlsx<_> = calamine::open_workbook_from_rs(cursor)?;
+  log(&format!("worksheets: {:?}", xls.worksheets()));
   if let Some(Ok(sheet)) = xls.worksheet_range_at(0) {
     let size = sheet.get_size();
     for row in 0..size.0 {

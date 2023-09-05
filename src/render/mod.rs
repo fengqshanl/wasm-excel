@@ -1,6 +1,7 @@
 pub mod update;
 pub mod basic;
 pub mod util;
+pub mod resize;
 
 use wasm_bindgen::prelude::*;
 use web_sys::{ Event, HtmlInputElement, EventTarget, InputEvent, Window, Document, HtmlElement, Element, MouseEvent, HtmlDivElement };

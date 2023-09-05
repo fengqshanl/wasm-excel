@@ -36,6 +36,7 @@ features = [
   'Node',
   'NodeList',
   'Event',
+  'DragEvent',
   'InputEvent',
   'MouseEvent',
   'EventTarget',

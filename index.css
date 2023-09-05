@@ -1,6 +1,5 @@
 .excel_row_col_div {
-  border-right: 0.1px solid #d1d1d1;
-  border-bottom: 0.1px solid #d1d1d1;
+  border: 0.1px solid #d1d1d1;
   display:flex;
   font-size:12px;
   padding:1px;
@@ -20,15 +19,15 @@
 }
 #excel_top_border {
   display:flex;
+  background-color: white;
+  z-index: 1;
   position: sticky;
   top: 0;
   flex-direction:row;
   flex-wrap:no-wrap;
 }
 .excel_top_border_col {
-  border-top: 0.1px solid #d1d1d1;
-  border-right: 0.1px solid #d1d1d1;
-  border-bottom: 0.1px solid #d1d1d1;
+  border: 0.1px solid #d1d1d1;
   display:flex;
   font-size:12px;
   padding:1px;
@@ -48,8 +47,9 @@
   margin-top:-1px
 }
 #excel_left_border {
-  border: 1px solid red;
   display:flex;
+  background-color: rgb(255, 255, 255);
+  z-index: 1;
   width: 62px;
   position: sticky;
   left: 0;
@@ -59,8 +59,7 @@
   margin-top:-1px
 }
 .excel_left_border_col {
-  border-right: 0.1px solid #d1d1d1;
-  border-bottom: 0.1px solid #d1d1d1;
+  border: 0.1px solid #d1d1d1;
   display:flex;
   font-size:12px;
   padding:1px;
@@ -72,6 +71,15 @@
   justify-content:center;
   align-items:center"
 }
+.excel_left_border_divide {
+  height: 1px;
+  margin-top: -1px;
+}
+.excel_left_border_divide:hover {
+  cursor: row-resize;
+  border: 2px solid red;
+  z-index: 2;
+}
 #excel_secondary_parent_container {
   width:100%;
   display:flex;
@@ -81,13 +89,14 @@
   width:90vw;
   height:80vh;
   overflow:auto;
-  display: inline-block;
+  display: flexbox;
 }
 .context_container {
-  left: 71px;
+  left: 63px;
   position: relative;
+  margin-top: -60%;
   display: flex;
-  overflow: auto;
+  overflow: visible;
   flex-direction: column;
-  top: 49px;
+  top: 55px;
 }

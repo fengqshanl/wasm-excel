@@ -9,5 +9,7 @@ pub fn update_excel(row: usize, col: usize, content: &str) {
   
   let excel_td= document.get_element_by_id(&format!("excel_{}_{}", row, col)).unwrap();
 
+  
+
   excel_td.set_inner_html(content);
 }

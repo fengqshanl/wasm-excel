@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 use crate::event::basic;
+use super::resize;
 use web_sys::{ Event, HtmlInputElement, EventTarget, InputEvent, Window, Document, HtmlElement, Element, MouseEvent, HtmlDivElement };
 use crate::log;
 
@@ -45,7 +46,11 @@ pub fn render_left_border() -> Element {
     row_col_child.set_attribute("id", &format!("excel_left_border_{}", col));
     row_col_child.set_attribute("class", "excel_left_border_col");
     row_col_child.set_inner_html(&format!("{}", col));
+
+    // let divide = resize::resize_divide(&col); 
+
     left_border.append_child(&row_col_child);
+    // left_border.append_child(&divide);
   }
   left_border
 }
