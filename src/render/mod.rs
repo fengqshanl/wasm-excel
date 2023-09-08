@@ -6,6 +6,7 @@ pub mod resize;
 use wasm_bindgen::prelude::*;
 use web_sys::{ Event, HtmlInputElement, EventTarget, InputEvent, Window, Document, HtmlElement, Element, MouseEvent, HtmlDivElement };
 use crate::log;
+use crate::event::container_scroll;
 
 pub fn render_excel() -> Result<(), JsValue> {
   let window = web_sys::window().expect("no global `window` exists");
@@ -15,6 +16,9 @@ pub fn render_excel() -> Result<(), JsValue> {
   parent.set_attribute("id", "excel_parent_container");
   basic::render_border(&parent);
   basic::render_context(&parent);
+ 
+  container_scroll::container_scroll_init(&parent);
+
   body.append_child(&parent)?;
   Ok(())
 }
