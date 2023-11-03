@@ -41,6 +41,6 @@ pub fn run() -> Result<(), JsValue> {
     val.add_event_listener_with_callback("change", set_page.as_ref().unchecked_ref()).unwrap();
     set_page.forget();
     body.append_child(&val)?;
-    render::render_excel()?; 
+    render::render_excel()?;
     Ok(())
 }

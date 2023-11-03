@@ -19,8 +19,8 @@ pub fn render_border(parent: &Element) {
 
 pub fn render_top_border() -> Element {
   let window = web_sys::window().expect("no global `window` exists");
-  let document = window.document().expect("should have a document on window"); 
-  
+  let document = window.document().expect("should have a document on window");
+
   let top_border = document.create_element("div").unwrap();
 
   top_border.set_attribute("id", "excel_top_border");
@@ -36,18 +36,18 @@ pub fn render_top_border() -> Element {
 
 pub fn render_left_border() -> Element {
   let window = web_sys::window().expect("no global `window` exists");
-  let document = window.document().expect("should have a document on window"); 
-  
+  let document = window.document().expect("should have a document on window");
+
   let left_border = document.create_element("div").unwrap();
 
   left_border.set_attribute("id", "excel_left_border");
-  for col in 1..51 {
+  for col in 1..5001 {
     let row_col_child = document.create_element("div").unwrap();
     row_col_child.set_attribute("id", &format!("excel_left_border_{}", col));
     row_col_child.set_attribute("class", "excel_left_border_col");
     row_col_child.set_inner_html(&format!("{}", col));
 
-    // let divide = resize::resize_divide(&col); 
+    // let divide = resize::resize_divide(&col);
 
     left_border.append_child(&row_col_child);
     // left_border.append_child(&divide);
@@ -58,17 +58,13 @@ pub fn render_left_border() -> Element {
 pub fn render_context(parent: &Element) {
   let window = web_sys::window().expect("no global `window` exists");
   let document = window.document().expect("should have a document on window");
-  let context_container = document.create_element("div").unwrap();
-  context_container.set_attribute("class", "context_container");
-  for row in 0..50 {
-    let excel_row = document.create_element("div").unwrap();
-    excel_row.set_attribute("id", &format!("excel_{}", row));
-    excel_row.set_attribute("class", "excel_row");
+  let context_container = document.create_element("table").unwrap();
+  context_container.set_attribute("class", "table is-bordered is-striped is-narrow is-hoverable is-fullwidth");
+  for row in 0..5000 {
+    let excel_row = document.create_element("tr").unwrap();
     for col in 0..50 {
-      let row_col_child = document.create_element("div").unwrap();
+      let row_col_child = document.create_element("td").unwrap();
       row_col_child.set_attribute("id", &format!("excel_{}_{}", row, col));
-      row_col_child.set_attribute("class", "excel_row_col_div");
-      basic::init_basic_event(&row_col_child);
       excel_row.append_child(&row_col_child);
     }
     context_container.append_child(&excel_row);

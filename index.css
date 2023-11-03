@@ -1,3 +1,5 @@
+@import url('./bulma.css');
+
 .excel_row_col_div {
   border: 0.1px solid #d1d1d1;
   display:flex;
@@ -53,7 +55,6 @@
   width:90vw;
   height:80vh;
   overflow:auto;
-  display: flexbox;
 }
 .context_container {
   /* position: static; */

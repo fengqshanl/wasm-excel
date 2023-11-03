@@ -14,10 +14,7 @@ pub fn render_excel() -> Result<(), JsValue> {
   let body = document.body().expect("document should have a body");
   let parent = document.create_element("div")?;
   parent.set_attribute("id", "excel_parent_container");
-  basic::render_border(&parent);
   basic::render_context(&parent);
- 
-  container_scroll::container_scroll_init(&parent);
 
   body.append_child(&parent)?;
   Ok(())
